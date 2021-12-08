@@ -90,7 +90,32 @@ function generatePhoneNumber(rawNumberArray) {
 // Desafio 12
 function triangleCheck(a, b, c) {
   // seu código aqui
+
+  const lines = [a, b, c];
+  function add(accumulator, a) {
+    return accumulator + a;
+  }
+
+  function sub(array) {
+    return Math.abs(array[0] - array[1]);
+  }
+
+  for (index = 0; index < lines.length; index += 1) {
+    let currentLines = [...lines];
+    let currentLine = lines[index];
+    let exceptCurrentLine = currentLines.splice(index, 1);
+
+    const sumOtherLines = currentLines.reduce(add, 0);
+    const absOtherLines = sub(currentLines);
+
+    if (currentLine > sumOtherLines || currentLine < absOtherLines) {
+      return false;
+    }
+  }
+  return true;
 }
+
+triangleCheck(3, 4, 5);
 
 // Desafio 13
 function hydrate() {
