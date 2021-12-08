@@ -22,6 +22,7 @@ function generatePhoneNumber(rawNumberArray) {
   // seu código aqui
   let isValid = false;
   let fullNumber = null;
+
   function isThisNumberValid(rawNumberArray) {
     if (rawNumberArray.length !== 11) {
       return ['Array com tamanho incorreto.', isValid];
@@ -34,7 +35,7 @@ function generatePhoneNumber(rawNumberArray) {
             'não é possível gerar um número de telefone com esses valores',
             isValid,
           ];
-        } else if (numberCounter[number] >= 3) {
+        } else if (numberCounter[number] >= 2) {
           return [
             'não é possível gerar um número de telefone com esses valores',
             isValid,
@@ -54,20 +55,10 @@ function generatePhoneNumber(rawNumberArray) {
     if (validation[1] !== true) {
       return validation[0];
     } else {
-      let middleSliceComma = rawNumberArray.slice(2, 6).toString();
-      let finalSliceComma = rawNumberArray.slice(7);
-      let middleSlice = '';
-      let finalSlice = '';
-      for (index = 0; index <= middleSliceComma; index += 1) {
-        if (middleSliceComma[index] !== ',') {
-          middleSlice += middleSliceComma[index];
-        }
-      }
-      for (index = 0; index <= finalSliceComma; index += 1) {
-        if (finalSliceComma[index] !== ',') {
-          finalSlice += finalSliceComma[index];
-        }
-      }
+      let middleSliceComma = rawNumberArray.slice(2, 7).toString();
+      let finalSliceComma = rawNumberArray.slice(7).toString();
+      let middleSlice = middleSliceComma.replace(/[^0-9]/g, '').split(',');
+      let finalSlice = finalSliceComma.replace(/[^0-9]/g, '').split(',');
 
       fullNumber =
         '(' +
@@ -77,15 +68,13 @@ function generatePhoneNumber(rawNumberArray) {
         middleSlice +
         '-' +
         finalSlice;
-      console.log(typeof middleSlice + ' ' + middleSlice);
+
+      return fullNumber;
     }
-    return fullNumber;
   }
-  main();
+  fullNumber = main();
   return fullNumber;
 }
-
-// console.log(generatePhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1]));
 
 // Desafio 12
 function triangleCheck(a, b, c) {
@@ -121,7 +110,7 @@ function hydrate(drinks) {
   drinks = drinks.replace(/[^0-9]/g, '');
   drinks = drinks.split('');
   let drinksQuantity = [];
-  for (i of drinks) {
+  for (let i of drinks) {
     i = parseInt(i);
     drinksQuantity.push(i);
   }
