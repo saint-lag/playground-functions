@@ -115,11 +115,28 @@ function triangleCheck(a, b, c) {
   return true;
 }
 
-triangleCheck(3, 4, 5);
-
 // Desafio 13
-function hydrate() {
+function hydrate(drinks) {
   // seu código aqui
+  drinks = drinks.replace(/[^0-9]/g, '');
+  drinks = drinks.split('');
+  let drinksQuantity = [];
+  for (i of drinks) {
+    i = parseInt(i);
+    drinksQuantity.push(i);
+  }
+
+  function add(accumulator, a) {
+    return accumulator + a;
+  }
+
+  const waterGlasses = drinksQuantity.reduce(add, 0);
+
+  if (waterGlasses > 1) {
+    return waterGlasses + ' copos de água';
+  } else {
+    return '1 copo de água';
+  }
 }
 
 module.exports = {
